@@ -4,6 +4,7 @@ import { UploadfileApi } from "./services/api";
 
 function App() {
   const file = useRef();
+  const result = useRef();
   const [Uploadfile, setUploadfile] = useState("");
   const [link, setLink] = useState("");
   const logo =
@@ -22,6 +23,7 @@ function App() {
 
         const response = await UploadfileApi(data);
         setLink(response.path);
+      } else {
       }
     };
     getImages();
@@ -45,8 +47,8 @@ function App() {
           </h4>
           <button onClick={() => uploadClick()}>Upload file</button>
           <br />
-          <a href={link} target={"_blank"}>
-            {link}
+          <a href={link} target={"_blank"} ref={result}>
+            {link ? link : Uploadfile ? <p className="link-wait">Wait for a second...</p> : link}
           </a>
         </div>
       </div>
